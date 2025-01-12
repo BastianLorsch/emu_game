@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbcb34jdxbxe7"]
+[gd_scene load_steps=6 format=3 uid="uid://dbcb34jdxbxe7"]
 
 [ext_resource type="PackedScene" uid="uid://bnnewvqxce12c" path="res://scenes/player.tscn" id="1_31fpa"]
 [ext_resource type="Texture2D" uid="uid://d0bib5ke71rg4" path="res://assets/sprites (placeholder)/world_tileset.png" id="2_ftn23"]
+[ext_resource type="PackedScene" uid="uid://6mlmib8u2q16" path="res://scenes/box.tscn" id="3_ymtv6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0mvk5"]
 texture = ExtResource("2_ftn23")
@@ -170,7 +171,7 @@ sources/0 = SubResource("TileSetAtlasSource_0mvk5")
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_31fpa")]
-position = Vector2(62, 26)
+position = Vector2(8, 26)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(1, 15)
@@ -180,3 +181,9 @@ zoom = Vector2(4, 4)
 tile_set = SubResource("TileSet_dgvl1")
 format = 2
 layer_0/tile_data = PackedInt32Array(262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 196627, 0, 0, 262136, 0, 0, 262137, 0, 0, 262138, 0, 0, 262139, 0, 0, 262140, 0, 0)
+
+[node name="Box (for crouch testing)" parent="." instance=ExtResource("3_ymtv6")]
+position = Vector2(-40, 11)
+
+[node name="Box (for crouch testing)2" parent="." instance=ExtResource("3_ymtv6")]
+position = Vector2(58, 7)
