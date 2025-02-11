@@ -1,11 +1,12 @@
 extends PlayerState
 
-var call_to_roll := false
+var call_to_roll : bool
 
 func enter_state(player_node):
 	super(player_node) # calls the same methode in parent class 
 	player.velocity.y = player.JUMP_VELOCITY
 	$"../AnimatedSprite2D".play("jump")
+	call_to_roll = false
 
 func handle_input(_delta):
 	var direction = Input.get_axis("move_left", "move_right")

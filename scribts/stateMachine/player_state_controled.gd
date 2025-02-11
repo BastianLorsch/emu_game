@@ -10,6 +10,7 @@ var last_facing_direction = 1
 
 func _ready() -> void:
 	change_state("IdleState") # start in idle state
+	animated_sprite.flip_h = true
 
 func change_state(new_state_name: String):
 	if current_state:
@@ -37,8 +38,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Flip sprite
 	if direction > 0:
-		animated_sprite.flip_h = false
+		animated_sprite.flip_h = true
 	elif direction < 0:
-		animated_sprite.flip_h = true 
+		animated_sprite.flip_h = false
 	
 	
