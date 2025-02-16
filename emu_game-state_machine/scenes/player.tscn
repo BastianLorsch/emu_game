@@ -1,0 +1,134 @@
+[gd_scene load_steps=21 format=3 uid="uid://bnnewvqxce12c"]
+
+[ext_resource type="Script" path="res://scribts/stateMachine/player_state_controled.gd" id="1_j53wj"]
+[ext_resource type="Texture2D" uid="uid://cxy0hq3hnbw42" path="res://assets/sprites (placeholder)/Emu_crouching.png" id="3_he8mq"]
+[ext_resource type="Shape2D" uid="uid://ce73qwd7qbt4k" path="res://resources/player_standing_collisionshape.tres" id="3_iv40j"]
+[ext_resource type="Script" path="res://scribts/stateMachine/idle_state.gd" id="4_7ia76"]
+[ext_resource type="Texture2D" uid="uid://4urmksgo3nu1" path="res://assets/sprites (placeholder)/Emu_rolling.png" id="4_t5p8u"]
+[ext_resource type="Script" path="res://scribts/stateMachine/run_state.gd" id="5_6f7sh"]
+[ext_resource type="Texture2D" uid="uid://k81u38oidv7e" path="res://assets/sprites (placeholder)/Emu_idle.png" id="5_nkudw"]
+[ext_resource type="Texture2D" uid="uid://qt6ay3t5j1x1" path="res://assets/sprites (placeholder)/Emu_jumping.png" id="6_0yb3k"]
+[ext_resource type="Script" path="res://scribts/stateMachine/jump_state.gd" id="6_75cwk"]
+[ext_resource type="Texture2D" uid="uid://dx2nf6ewsxxcw" path="res://assets/sprites (placeholder)/Emu_running.png" id="7_v6jvw"]
+[ext_resource type="Script" path="res://scribts/stateMachine/roll_state.gd" id="7_y34yc"]
+[ext_resource type="Script" path="res://scribts/stateMachine/crouch_state.gd" id="8_1yt45"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a621x"]
+atlas = ExtResource("3_he8mq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjh6v"]
+atlas = ExtResource("3_he8mq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a17g"]
+atlas = ExtResource("4_t5p8u")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aytkv"]
+atlas = ExtResource("5_nkudw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4ht2"]
+atlas = ExtResource("6_0yb3k")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfdbl"]
+atlas = ExtResource("4_t5p8u")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib80p"]
+atlas = ExtResource("7_v6jvw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t76l6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a621x")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjh6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a17g")
+}],
+"loop": true,
+"name": &"crouch_walk",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aytkv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4ht2")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfdbl")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib80p")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_j53wj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = ExtResource("3_iv40j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -8)
+scale = Vector2(0.0708008, 0.0874024)
+sprite_frames = SubResource("SpriteFrames_t76l6")
+animation = &"crouch_walk"
+
+[node name="CrouchRayCast_1" type="RayCast2D" parent="."]
+position = Vector2(-5, -8)
+target_position = Vector2(0, -8)
+
+[node name="CrouchRayCast_2" type="RayCast2D" parent="."]
+position = Vector2(5, -8)
+target_position = Vector2(0, -8)
+
+[node name="IdleState" type="Node" parent="."]
+script = ExtResource("4_7ia76")
+
+[node name="RunState" type="Node" parent="."]
+script = ExtResource("5_6f7sh")
+
+[node name="JumpState" type="Node" parent="."]
+script = ExtResource("6_75cwk")
+
+[node name="RollState" type="Node" parent="."]
+script = ExtResource("7_y34yc")
+
+[node name="CrouchState" type="Node" parent="."]
+script = ExtResource("8_1yt45")
+
+[node name="Camera2D" type="Camera2D" parent="."]
