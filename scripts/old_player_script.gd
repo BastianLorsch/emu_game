@@ -1,13 +1,15 @@
+
 extends CharacterBody2D
 
 
-const STAND_SPEED = 130
-const CROUCH_SPEED = 130
-const JUMP_VELOCITY = -300.0
+@export var STAND_SPEED = 130
+@export var CROUCH_SPEED = 80
+@export var JUMP_VELOCITY = -300.0
 var speed = STAND_SPEED
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+var is_rolling = false
 var is_crouching = false
 var stuck_under_object = false
 
@@ -27,7 +29,10 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	
+	if Input.is_action_just_pressed("roll") and is_on_floor():
+		roll()
+	
 	# Get the input direction: -1, 0, 1
 	var direction := Input.get_axis("move_left", "move_right")
 	
@@ -42,6 +47,8 @@ func _physics_process(delta: float) -> void:
 		if direction == 0:
 			if is_crouching:
 				animated_sprite.play("crouch")
+			elif is_rolling:
+				animated_sprite.play("roll")
 			else:
 				animated_sprite.play("idle")
 		else:
@@ -81,7 +88,7 @@ func _physics_process(delta: float) -> void:
 
 # creating new functions here
 
-func crouch():
+func crouch() -> void:
 	if is_crouching:
 		return
 	else:
@@ -90,11 +97,11 @@ func crouch():
 		collision_shape.position.y = -6
 		speed = CROUCH_SPEED
 
-func stand():
+func stand() -> void:
 	if is_crouching == false:
 		return
 	else:
-		is_crouching = false
+		is_crouching == false
 		collision_shape.shape = standing_collisionshape
 		collision_shape.position.y = -8
 		speed = STAND_SPEED
@@ -102,3 +109,6 @@ func stand():
 func headroom_free() -> bool:
 	var result = !crouch_raycast1.is_colliding() && !crouch_raycast2.is_colliding()
 	return result
+
+func roll():
+	var is_rolling = true
