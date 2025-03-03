@@ -3,7 +3,7 @@ zuerst: installiere git über folgende website: https://git-scm.com/downloads
 Rechtsklicke den Ordner auf deinem Computer, in dem du das Projekt speichern willst.
 Wähle ganz unten: 'im Terminal öffnen'
 Im Terminal gibst du folgenden Befehl ein: ' git clone "https://github.com/BastianLorsch/emu_game.git" '
-Den damit erstellten Ordner kannst du auf gewohnte Weise als Gitprojekt importieren
+Den damit erstellten Ordner kannst du auf gewohnte Weise als Godotprojekt importieren
 
 du kannst hier veränderungen vornehmen
 
