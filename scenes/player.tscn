@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bnnewvqxce12c"]
+[gd_scene load_steps=23 format=3 uid="uid://bnnewvqxce12c"]
 
 [ext_resource type="Script" path="res://scripts/stateMachine/player_state_controled.gd" id="1_j53wj"]
 [ext_resource type="Texture2D" uid="uid://cxy0hq3hnbw42" path="res://assets/sprites (placeholder)/Emu_crouching.png" id="3_he8mq"]
@@ -40,6 +40,10 @@ region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ib80p"]
 atlas = ExtResource("7_v6jvw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ciqp"]
+atlas = ExtResource("5_nkudw")
 region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t76l6"]
@@ -90,6 +94,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ib80p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ciqp")
 }],
 "loop": true,
 "name": &"run",

@@ -17,7 +17,7 @@ func _set_health(new_health):
 		timer.start()
 	else:
 		damage_bar.value = health
-	print(health, "healthbar ", value)
+	print(health, " healthbar ", value)
 
 func init_health(_health):
 	health = _health

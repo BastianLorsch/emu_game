@@ -13,6 +13,7 @@ func handle_input(_delta):
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction != 0:
 		player.velocity.x = direction * player.SPEED
+		$"../AnimatedSprite2D".play("crouch_walk")
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)
 	
