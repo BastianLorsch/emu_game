@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnnewvqxce12c"]
+[gd_scene load_steps=22 format=3 uid="uid://bnnewvqxce12c"]
 
 [ext_resource type="Script" path="res://scripts/stateMachine/player_state_controled.gd" id="1_j53wj"]
 [ext_resource type="Texture2D" uid="uid://cxy0hq3hnbw42" path="res://assets/sprites (placeholder)/Emu_crouching.png" id="3_he8mq"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dx2nf6ewsxxcw" path="res://assets/sprites (placeholder)/Emu_running.png" id="7_v6jvw"]
 [ext_resource type="Script" path="res://scripts/stateMachine/roll_state.gd" id="7_y34yc"]
 [ext_resource type="Script" path="res://scripts/stateMachine/crouch_state.gd" id="8_1yt45"]
+[ext_resource type="PackedScene" uid="uid://di3wykbg8oe84" path="res://scenes/healthbar.tscn" id="13_kek4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a621x"]
 atlas = ExtResource("3_he8mq")
@@ -133,3 +134,9 @@ script = ExtResource("8_1yt45")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
+
+[node name="Healthbar" parent="." instance=ExtResource("13_kek4k")]
+offset_left = -8.0
+offset_top = -23.0
+offset_right = 7.0
+offset_bottom = -22.0
