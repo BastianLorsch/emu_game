@@ -3,6 +3,9 @@ extends CharacterBody2D
 const SPEED = 50.0
 const JUMP_VELOCITY = -400.0
 @onready var player = get_node("../../Player")
+@onready var weapon = $weapon
+var is_attacking = false
+var attack_finished = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -15,14 +18,24 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var puffer
+	
 	var do_movement = true
 	if player.position.x +30 > position.x and position.x > player.position.x -30:
 		do_movement = false
-	elif player.position.x > position.x:
-		puffer = -30
-	else: puffer = 30
 	
 	if do_movement:
-		position.x = move_toward(position.x, player.position.x + puffer, delta * SPEED)
+		position.x = move_toward(position.x, player.position.x, delta * SPEED)
+	else: is_attacking = true
 	move_and_slide()
+	
+	#attack handling
+	if is_attacking and weapon.rotation_degrees > -30 and !attack_finished:
+		weapon.rotation_degrees -= 200 * delta
+	elif is_attacking and !attack_finished:
+		attack_finished = true
+	elif attack_finished and weapon.rotation_degrees < 70:
+		weapon.rotation_degrees += 100 * delta
+	else: 
+		attack_finished = false
+		is_attacking = false
+	

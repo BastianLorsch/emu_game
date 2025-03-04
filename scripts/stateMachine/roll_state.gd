@@ -14,8 +14,9 @@ func enter_state(player_node):
 	player.velocity.x = direction * DASH_SPEED
 	dash_timer = DASH_DURATION
 	$"../AnimatedSprite2D".play("roll")
-	$"../CollisionShape2D".shape = preload("res://resources/player_crouching_collisionshape.tres")
+	$"../CollisionShape2D".shape = preload("res://resources/player_crouching_collisionshape.tres")  #I-Frame hinzufügen!
 	$"../CollisionShape2D".position.y = -6
+	
 
 func handle_input(delta):
 	dash_timer -= delta
