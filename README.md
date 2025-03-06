@@ -16,3 +16,14 @@ git commit -m "_hier einen Kommentar einfügen, was du gemacht hast_" <br/>
 git push origin <br/>
 
 Zu risiken und Nebenwirkungen lesen Sie die Packungsbeilage und fragen Sie Ihre Ärztin, Ihren Arzt oder in Ihrer Apotheke.
+
+
+!NEUES SCRIPT!: signalBus, verwaltet globale Signale (solche, auf welche du von überall zugreifen kannst)
+
+Neue Collision-Layer:
+  Tileset:   Layer:2 Mask:1
+  Player:  Layer:1 Mask:1, 2
+  Enemy:  Layer:3 Mask:1, 2
+
+
+Mach mal I-Frames
