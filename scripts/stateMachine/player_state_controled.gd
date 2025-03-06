@@ -14,12 +14,13 @@ func _ready() -> void:
 	change_state("IdleState") # start in idle state
 	animated_sprite.flip_h = true
 	healthbar.init_health(health)
+	SignalBus.damaged.connect(_set_health)
 
 func change_state(new_state_name: String):
 	if current_state:
 		current_state.exit_state() # exit current state, can be used because CharacterBody2D inherits node
 	current_state = get_node(new_state_name)
-	if current_state: # ensure new state exit
+	if current_state: # ensure new state exit  
 		current_state.enter_state(self) # enter new state
 
 
@@ -45,8 +46,7 @@ func _physics_process(delta: float) -> void:
 	elif direction < 0:
 		animated_sprite.flip_h = false
 	
-	
 func _set_health(new_health):
-	health = min(healthbar.max_value, new_health)
+	health = min(healthbar.max_value, health - new_health)
 	healthbar.health = health
 	print(health, "player")

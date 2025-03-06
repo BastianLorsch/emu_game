@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8n00fc7qlxqg"]
+[gd_scene load_steps=4 format=3 uid="uid://c8n00fc7qlxqg"]
 
 [ext_resource type="Texture2D" uid="uid://coraywoqxlgy5" path="res://icon.svg" id="1_2dtgo"]
+[ext_resource type="Script" path="res://scripts/weapon_area_2d.gd" id="2_me60t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hd6ms"]
 size = Vector2(125.361, 126.562)
@@ -12,7 +13,10 @@ texture = ExtResource("1_2dtgo")
 offset = Vector2(-60.6635, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_me60t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-60.6635, 0)
 shape = SubResource("RectangleShape2D_hd6ms")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
