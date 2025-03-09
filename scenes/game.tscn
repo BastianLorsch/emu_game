@@ -7,4 +7,3 @@
 script = ExtResource("1_xcb24")
 
 [node name="title_screen" parent="." instance=ExtResource("6_rudll")]
-position = Vector2(-19, -67)

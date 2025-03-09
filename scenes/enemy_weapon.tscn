@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8n00fc7qlxqg"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_1wbc3"]
+[ext_resource type="Texture2D" uid="uid://coraywoqxlgy5" path="res://icon.svg" id="2_n8b4g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hd6ms"]
+size = Vector2(125.361, 126.562)
+
+[node name="enemy_weapon" type="Area2D"]
+position = Vector2(25, 0)
+scale = Vector2(0.412109, 0.03125)
+collision_layer = 8
+script = ExtResource("1_1wbc3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-60.6635, 0)
+shape = SubResource("RectangleShape2D_hd6ms")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_n8b4g")
+offset = Vector2(-60.6636, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

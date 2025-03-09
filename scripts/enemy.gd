@@ -1,11 +1,17 @@
 extends CharacterBody2D
+class_name enemy
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -400.0
 @onready var player = get_node("../../Player")
 @onready var weapon = $weapon
+@onready var healthbar = $Healthbar 
 var is_attacking = false
 var attack_finished = false
+var health = 150 : set = _set_health
+
+func _ready() -> void:
+	healthbar.init_health(health)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -39,3 +45,11 @@ func _physics_process(delta: float) -> void:
 		attack_finished = false
 		is_attacking = false
 	
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	_set_health(10)
+
+func _set_health(new_health):
+	health = min(healthbar.max_value, health - new_health)
+	healthbar.health = health
+	if  health <= 0:
+		queue_free()

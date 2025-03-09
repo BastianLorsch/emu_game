@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bnnewvqxce12c"]
+[gd_scene load_steps=25 format=3 uid="uid://bnnewvqxce12c"]
 
 [ext_resource type="Script" path="res://scripts/stateMachine/player_state_controled.gd" id="1_j53wj"]
 [ext_resource type="Texture2D" uid="uid://cxy0hq3hnbw42" path="res://assets/sprites (placeholder)/Emu_crouching.png" id="3_he8mq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/stateMachine/roll_state.gd" id="7_y34yc"]
 [ext_resource type="Script" path="res://scripts/stateMachine/crouch_state.gd" id="8_1yt45"]
 [ext_resource type="PackedScene" uid="uid://di3wykbg8oe84" path="res://scenes/healthbar.tscn" id="13_kek4k"]
+[ext_resource type="Texture2D" uid="uid://coraywoqxlgy5" path="res://icon.svg" id="14_qojpw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a621x"]
 atlas = ExtResource("3_he8mq")
@@ -103,6 +104,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xpe1"]
+size = Vector2(13.6364, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_j53wj")
@@ -115,7 +119,7 @@ shape = ExtResource("3_iv40j")
 position = Vector2(-1, -8)
 scale = Vector2(0.0708008, 0.0874024)
 sprite_frames = SubResource("SpriteFrames_t76l6")
-animation = &"crouch_walk"
+animation = &"idle"
 
 [node name="CrouchRayCast_1" type="RayCast2D" parent="."]
 position = Vector2(-5, -8)
@@ -144,7 +148,23 @@ script = ExtResource("8_1yt45")
 zoom = Vector2(6, 6)
 
 [node name="Healthbar" parent="." instance=ExtResource("13_kek4k")]
+z_index = -1
 offset_left = -8.0
 offset_top = -23.0
 offset_right = 7.0
 offset_bottom = -22.0
+
+[node name="player_weapon" type="Area2D" parent="."]
+position = Vector2(-2, -11)
+rotation = 1.22173
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_weapon"]
+position = Vector2(-7, 0)
+scale = Vector2(1.1, 1)
+shape = SubResource("RectangleShape2D_3xpe1")
+
+[node name="Sprite2D" type="Sprite2D" parent="player_weapon"]
+scale = Vector2(0.121094, 0.0078125)
+texture = ExtResource("14_qojpw")
+offset = Vector2(-57.8064, 0)
