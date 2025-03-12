@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	
 	#attack handling
 	if is_attacking and weapon.rotation_degrees > -30 and !attack_finished:
-		weapon.rotation_degrees -= 200 * delta
+		weapon.rotation_degrees -= 300 * delta
 	elif is_attacking and !attack_finished:
 		attack_finished = true
 	elif attack_finished and weapon.rotation_degrees < 70:
@@ -48,8 +48,8 @@ func _physics_process(delta: float) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	_set_health(10)
 
-func _set_health(new_health):
-	health = min(healthbar.max_value, health - new_health)
+func _set_health(damage):
+	health = min(healthbar.max_value, health - damage)
 	healthbar.health = health
 	if  health <= 0:
 		queue_free()

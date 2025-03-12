@@ -16,7 +16,10 @@ func enter_state(player_node):
 	$"../AnimatedSprite2D".play("roll")
 	$"../CollisionShape2D".shape = preload("res://resources/player_crouching_collisionshape.tres")  #I-Frame hinzufügen!
 	$"../CollisionShape2D".position.y = -6
-	
+	$"..".collision_layer = 2
+
+func exit_state():
+	$"..".collision_layer = 1
 
 func handle_input(delta):
 	dash_timer -= delta

@@ -50,8 +50,8 @@ func _physics_process(delta: float) -> void:
 	elif direction < 0:
 		animated_sprite.flip_h = false
 	
-func _set_health(new_health):
-	health = min(healthbar.max_value, health - new_health)
+func _set_health(damage):
+	health = min(healthbar.max_value, health - damage)
 	healthbar.health = health
 	print(health, "player")
 	
