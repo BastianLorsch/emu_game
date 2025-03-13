@@ -6,11 +6,8 @@ func enter_state(player_node):
 	$"../AnimatedSprite2D".play("crouch")
 	$"../CollisionShape2D".shape = preload("res://resources/player_crouching_collisionshape.tres")
 	$"../CollisionShape2D".position.y = -6
-	$"..".collision_layer = 2
 	var stuck_under_object = false
 
-func exit_state():
-	$"..".collision_layer = 1
 
 func handle_input(_delta):
 	var direction = Input.get_axis("move_left", "move_right")
