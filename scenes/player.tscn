@@ -175,4 +175,7 @@ metadata/_edit_group_ = true
 [node name="attack_cooldown" type="Timer" parent="player_weapon"]
 one_shot = true
 
+[node name="player_heart" type="Marker2D" parent="."]
+position = Vector2(0, -12)
+
 [connection signal="timeout" from="player_weapon/attack_cooldown" to="player_weapon" method="_on_attack_cooldown_timeout"]

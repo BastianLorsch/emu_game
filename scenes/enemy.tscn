@@ -26,7 +26,6 @@ texture = ExtResource("1_2gbce")
 
 [node name="weapon" parent="." instance=ExtResource("3_yj2ym")]
 position = Vector2(-1, 3)
-rotation = 1.22173
 
 [node name="Healthbar" parent="." instance=ExtResource("4_qag14")]
 z_index = -1
