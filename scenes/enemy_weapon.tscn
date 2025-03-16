@@ -1,28 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8n00fc7qlxqg"]
+[gd_scene load_steps=8 format=3 uid="uid://c8n00fc7qlxqg"]
 
 [ext_resource type="Script" uid="uid://bpbkti26xj1oc" path="res://scripts/weapon.gd" id="1_1wbc3"]
-[ext_resource type="Texture2D" uid="uid://coraywoqxlgy5" path="res://icon.svg" id="2_n8b4g"]
+[ext_resource type="Texture2D" uid="uid://dsedefroiwl3j" path="res://assets/sprites (final)/enemy_weapon.png" id="2_670s5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hd6ms"]
-size = Vector2(125.361, 126.562)
+size = Vector2(94.2255, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll2ne"]
+atlas = ExtResource("2_670s5")
+region = Rect2(0, 0, 502, 2002)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl2t6"]
+atlas = ExtResource("2_670s5")
+region = Rect2(502, 0, 502, 2002)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg7q2"]
+atlas = ExtResource("2_670s5")
+region = Rect2(1004, 0, 502, 2002)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xw71r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll2ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl2t6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cg7q2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl2t6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll2ne")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 15.0
+}]
 
 [node name="enemy_weapon" type="Area2D"]
 position = Vector2(0, -1)
-scale = Vector2(0.412109, 0.03125)
+scale = Vector2(0.798616, 0.0555557)
 collision_layer = 8
 script = ExtResource("1_1wbc3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(60.6636, 0)
+position = Vector2(14.466, 0)
 shape = SubResource("RectangleShape2D_hd6ms")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(121.327, 0)
-texture = ExtResource("2_n8b4g")
-offset = Vector2(-60.6636, 0)
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(77.119, 13.6313)
+rotation = 1.5708
+scale = Vector2(0.914863, 0.112068)
+sprite_frames = SubResource("SpriteFrames_xw71r")
+animation = &"new_animation"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

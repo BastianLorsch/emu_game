@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhw7pncb0cxen"]
+
+[ext_resource type="Script" uid="uid://0a8gds686es3" path="res://scripts/player_weapon.gd" id="1_bh1vq"]
+[ext_resource type="Texture2D" uid="uid://xsurrsyjsrtk" path="res://assets/sprites (final)/player_katana.png" id="2_bh1vq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maq6x"]
+atlas = ExtResource("2_bh1vq")
+region = Rect2(0, 0, 1002, 1002)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i56rw"]
+atlas = ExtResource("2_bh1vq")
+region = Rect2(1002, 0, 1002, 1002)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwqxo"]
+atlas = ExtResource("2_bh1vq")
+region = Rect2(2004, 0, 1002, 1002)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0dvax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maq6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i56rw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwqxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i56rw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maq6x")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 15.0
+}]
+
+[node name="player_weapon" type="Area2D"]
+rotation = -1.60516
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_bh1vq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.63432
+polygon = PackedVector2Array(-3.095, -14.47, 4, -14, 11, -12, 15, -7, 18, -1.485, 17.31, -0.645, 11, 0.655, 0.905, 0.59, 0.61, -0.505, -0.53, -1, -1, -9)
+disabled = true
+
+[node name="attack_cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, 0)
+rotation = 1.63245
+scale = Vector2(0.0265719, 0.0215419)
+sprite_frames = SubResource("SpriteFrames_0dvax")
+animation = &"attack"
+frame = 4
+frame_progress = 1.0
+offset = Vector2(263.437, -229.32)
+
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

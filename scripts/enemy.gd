@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	_set_health(10)
+	print("hurt enemy")
 
 func _set_health(damage):
 	health = min(healthbar.max_value, health - damage)

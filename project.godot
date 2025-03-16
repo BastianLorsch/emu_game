@@ -62,7 +62,8 @@ attack={
 2d_physics/layer_1="player"
 2d_physics/layer_2="tilemap"
 2d_physics/layer_3="enemy"
-2d_physics/layer_4="weapon"
+2d_physics/layer_4="enemy_weapon"
+2d_physics/layer_5="player_weapon"
 
 [rendering]
 
