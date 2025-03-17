@@ -1,6 +1,8 @@
 # idle state
 extends PlayerState
 
+@onready var player_weapon = $"../player_weapon"
+
 func enter_state(player_node):
 	super(player_node) # calls the same methode in parent class 
 	player.velocity.x = 0
@@ -18,5 +20,8 @@ func handle_input(_delta):
 	elif Input.is_action_just_pressed("roll"):
 		player.change_state("RollState")
 	
-	if Input.is_action_pressed("crouch") and  player.is_on_floor():
+	elif Input.is_action_pressed("crouch") and  player.is_on_floor():
 		player.change_state("CrouchState")
+		
+	elif Input.is_action_just_pressed("attack") and !player_weapon.attacking and player_weapon.attack_ready:
+		player_weapon.attacking = true

@@ -1,5 +1,7 @@
 extends PlayerState
 
+@onready var player_weapon = $"../player_weapon"
+
 var call_to_roll : bool
 
 func enter_state(player_node):
@@ -21,3 +23,5 @@ func handle_input(_delta):
 	if Input.is_action_just_pressed("roll"):
 		call_to_roll = true
 	
+	elif Input.is_action_just_pressed("attack") and !player_weapon.attacking and player_weapon.attack_ready:
+		player_weapon.attacking = true

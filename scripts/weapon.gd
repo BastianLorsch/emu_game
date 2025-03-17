@@ -6,7 +6,7 @@ extends Area2D
 @onready var attack_ani = $AnimatedSprite2D
 @onready var weapon_collisionShape = $CollisionShape2D
 var attacking = false
-var attack_ready = true
+var attack_ready = false
 func _process(delta: float) -> void:
 	if !attacking:
 		look_at(player_heart.global_position)

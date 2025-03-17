@@ -62,4 +62,5 @@ frame = 4
 frame_progress = 1.0
 offset = Vector2(263.437, -229.32)
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

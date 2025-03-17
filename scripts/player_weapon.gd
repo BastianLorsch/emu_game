@@ -8,14 +8,10 @@ var attack_ready = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	if Input.is_action_just_pressed("attack") and !attacking and attack_ready:
-		attacking = true
 	
 	if !attacking:
 		look_at(get_global_mouse_position())
@@ -35,3 +31,6 @@ func _process(delta: float) -> void:
 func _on_attack_cooldown_timeout() -> void:
 	attack_ready = true
 	print("attack ready")
+		
+func _on_body_entered(body: Node2D) -> void:
+	SignalBus.enemy_damaged.emit(20)

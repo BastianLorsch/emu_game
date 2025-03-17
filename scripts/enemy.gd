@@ -11,6 +11,7 @@ var do_movement = true
 
 func _ready() -> void:
 	healthbar.init_health(health)
+	SignalBus.enemy_damaged.connect(_set_health)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -32,10 +33,6 @@ func _physics_process(delta: float) -> void:
 	if do_movement:
 		position.x = move_toward(position.x, player.position.x, delta * SPEED)
 	move_and_slide()
-	
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	_set_health(10)
-	print("hurt enemy")
 
 func _set_health(damage):
 	health = min(healthbar.max_value, health - damage)
