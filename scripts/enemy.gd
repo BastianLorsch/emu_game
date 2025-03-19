@@ -3,11 +3,11 @@ class_name enemy
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -400.0
-@onready var player = get_node("../../Player")
 @onready var weapon = $weapon
 @onready var healthbar = $Healthbar 
 var health = 150 : set = _set_health
 var do_movement = true
+const player = preload("res://scenes/player.tscn")
 
 func _ready() -> void:
 	healthbar.init_health(health)
@@ -24,8 +24,9 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	var player_x_pos = player.position.x
 	
-	if player.position.x +30 > position.x and position.x > player.position.x -30:
+	if player_x_pos +30 > position.x and position.x > player_x_pos -30:
 		do_movement = false
 	else:
 		do_movement = true

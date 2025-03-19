@@ -19,6 +19,7 @@ func _ready() -> void:
 	animated_sprite.flip_h = true
 	healthbar.init_health(health)
 	SignalBus.player_damaged.connect(_set_health)
+	health = 100
 	
 
 func change_state(new_state_name: String):
@@ -51,16 +52,15 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 	elif direction < 0:
 		animated_sprite.flip_h = false
-		
-		if regenerating == true:
-			_set_health(-0.1)
+	
+	if regenerating == true:
+		_set_health(-0.1)
 	
 func _set_health(damage):
 	health = min(healthbar.max_value, health - damage)
 	if health <= 0:
 		SignalBus.player_dead.emit()
 	healthbar.health = health
-	print(health, "player")
 	if damage > 0:
 		regenerating = false
 		timer_regeneration.start()

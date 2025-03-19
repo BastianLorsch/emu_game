@@ -55,3 +55,6 @@ physics_material_override = SubResource("PhysicsMaterial_bswci")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="world_boundaries/StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_rus8k")
+
+[node name="enemy2" parent="." instance=ExtResource("5_varlt")]
+position = Vector2(344, 31)

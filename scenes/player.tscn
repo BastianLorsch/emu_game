@@ -159,5 +159,6 @@ collision_layer = 8
 position = Vector2(0, -12)
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
