@@ -161,4 +161,10 @@ position = Vector2(0, -12)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="enemy_spawner_left" type="Marker2D" parent="."]
+position = Vector2(-195, -12)
+
+[node name="enemy_spawner_right" type="Marker2D" parent="."]
+position = Vector2(195, -12)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

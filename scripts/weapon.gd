@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var player_heart = get_node("../../../Player/player_heart")
+@onready var player_heart = get_node("../../../../Player/player_heart")
 @onready var enemy = $".."
 @onready var attack_cooldown = $Timer
 @onready var attack_ani = $AnimatedSprite2D

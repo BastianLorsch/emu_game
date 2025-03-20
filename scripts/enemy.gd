@@ -5,13 +5,16 @@ const SPEED = 50.0
 const JUMP_VELOCITY = -400.0
 @onready var weapon = $weapon
 @onready var healthbar = $Healthbar 
-@onready var player = get_node("../../Player")
+@onready var player = get_node("../../../Player")
+@onready var spawner = $".."
 var health = 150 : set = _set_health
 var do_movement = true
 
 func _ready() -> void:
+	position.x = spawner.spawn_pos
 	healthbar.init_health(health)
 	SignalBus.enemy_damaged.connect(_set_health)
+	
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

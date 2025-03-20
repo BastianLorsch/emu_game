@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://cqn3m47clxc2f"]
 
 [ext_resource type="Texture2D" uid="uid://cfjcdmgxb8fy8" path="res://assets/sprites (final)/ground.png" id="2_bswci"]
-[ext_resource type="PackedScene" uid="uid://1f8h6hfjlh1b" path="res://scenes/enemy.tscn" id="5_varlt"]
+[ext_resource type="Script" uid="uid://c5eqc1vdx55f6" path="res://scripts/enemy_holder.gd" id="2_rus8k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rus8k"]
 texture = ExtResource("2_bswci")
@@ -24,9 +24,6 @@ normal = Vector2(1, 0)
 distance = 22.0
 
 [node name="level_1" type="Node2D"]
-
-[node name="enemy" parent="." instance=ExtResource("5_varlt")]
-position = Vector2(277, 33)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(0.02, 0.02)
@@ -56,5 +53,11 @@ physics_material_override = SubResource("PhysicsMaterial_bswci")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="world_boundaries/StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_rus8k")
 
-[node name="enemy2" parent="." instance=ExtResource("5_varlt")]
-position = Vector2(344, 31)
+[node name="enemy holder" type="Node" parent="."]
+script = ExtResource("2_rus8k")
+
+[node name="Timer" type="Timer" parent="enemy holder"]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="enemy holder/Timer" to="enemy holder" method="_on_timer_timeout"]

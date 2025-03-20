@@ -13,6 +13,8 @@ var regenerating = false
 @onready var weapon = $player_weapon
 @onready var weapon_sprite = $player_weapon/Sprite2D
 @onready var timer_regeneration = $Timer
+@onready var enemy_spawner_left = $enemy_spawner_left
+@onready var enemy_spawner_right = $enemy_spawner_right
 
 func _ready() -> void:
 	change_state("IdleState") # start in idle state
@@ -20,6 +22,7 @@ func _ready() -> void:
 	healthbar.init_health(health)
 	SignalBus.player_damaged.connect(_set_health)
 	SignalBus.start_game.connect(restore_health)
+	SignalBus.get_enemy_spawner_position.connect(set_enemy_spawner_position)
 	print(health)
 
 
@@ -59,9 +62,7 @@ func _physics_process(delta: float) -> void:
 		_set_health(-0.1)
 	
 func _set_health(damage):
-	print(health, damage)
 	health = min(healthbar.max_value, health - damage)
-	print(health)
 	if health <= 0:
 		SignalBus.player_dead.emit()
 	healthbar.health = health
@@ -73,6 +74,8 @@ func restore_health():
 	health = 100
 	healthbar.init_health(health)
 
-
 func _on_timer_timeout() -> void:
 	regenerating = true
+
+func set_enemy_spawner_position():
+	SignalBus.enemy_spawner_position.emit(enemy_spawner_left.global_position.x, enemy_spawner_right.global_position.x)
