@@ -36,6 +36,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	var damage = 10
 	SignalBus.player_damaged.emit(damage)
+	#print("weapon_damage", body)
 
 func _on_timer_timeout() -> void:
 	attack_ready = true

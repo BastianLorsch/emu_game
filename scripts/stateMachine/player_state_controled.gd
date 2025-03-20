@@ -6,7 +6,7 @@ const JUMP_VELOCITY = -300
 
 var current_state
 var last_facing_direction = 1
-var health = 100 : set = _set_health
+var health = 100
 var regenerating = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var healthbar = $Healthbar
@@ -19,8 +19,10 @@ func _ready() -> void:
 	animated_sprite.flip_h = true
 	healthbar.init_health(health)
 	SignalBus.player_damaged.connect(_set_health)
-	health = 100
-	
+	SignalBus.start_game.connect(restore_health)
+	print(health)
+
+
 
 func change_state(new_state_name: String):
 	if current_state:
@@ -57,13 +59,20 @@ func _physics_process(delta: float) -> void:
 		_set_health(-0.1)
 	
 func _set_health(damage):
+	print(health, damage)
 	health = min(healthbar.max_value, health - damage)
+	print(health)
 	if health <= 0:
 		SignalBus.player_dead.emit()
 	healthbar.health = health
 	if damage > 0:
 		regenerating = false
 		timer_regeneration.start()
+
+func restore_health():
+	health = 100
+	healthbar.init_health(health)
+
 
 func _on_timer_timeout() -> void:
 	regenerating = true

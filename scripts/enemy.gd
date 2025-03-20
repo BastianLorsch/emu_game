@@ -5,9 +5,9 @@ const SPEED = 50.0
 const JUMP_VELOCITY = -400.0
 @onready var weapon = $weapon
 @onready var healthbar = $Healthbar 
+@onready var player = get_node("../../Player")
 var health = 150 : set = _set_health
 var do_movement = true
-const player = preload("res://scenes/player.tscn")
 
 func _ready() -> void:
 	healthbar.init_health(health)
