@@ -8,6 +8,7 @@ var current_state
 var last_facing_direction = 1
 var health = 100
 var regenerating = false
+var dead = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var healthbar = $Healthbar
 @onready var weapon = $player_weapon
@@ -24,7 +25,6 @@ func _ready() -> void:
 	SignalBus.start_game.connect(restore_health)
 	SignalBus.get_enemy_spawner_position.connect(set_enemy_spawner_position)
 	print(health)
-
 
 
 func change_state(new_state_name: String):
@@ -63,8 +63,10 @@ func _physics_process(delta: float) -> void:
 	
 func _set_health(damage):
 	health = min(healthbar.max_value, health - damage)
-	if health <= 0:
+	if health <= 0 and !dead:
+		dead = true
 		SignalBus.player_dead.emit()
+		
 	healthbar.health = health
 	if damage > 0:
 		regenerating = false
@@ -78,4 +80,5 @@ func _on_timer_timeout() -> void:
 	regenerating = true
 
 func set_enemy_spawner_position():
+	print("set en spw pos")
 	SignalBus.enemy_spawner_position.emit(enemy_spawner_left.global_position.x, enemy_spawner_right.global_position.x)

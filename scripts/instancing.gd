@@ -20,6 +20,7 @@ func _instance_game_start():
 	print("instanced")
 	
 func _on_player_dead():
+	print("dead")
 	remove_child($Player)
 	remove_child($level_1)
 	var scene_title_screen = load("res://scenes/title_screen.tscn")

@@ -14,8 +14,8 @@ func _ready() -> void:
 	position.x = spawner.spawn_pos
 	healthbar.init_health(health)
 	SignalBus.enemy_damaged.connect(_set_health)
+	SignalBus.player_dead.connect(_on_player_dead)
 	
-
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -43,3 +43,7 @@ func _set_health(damage):
 	healthbar.health = health
 	if  health <= 0:
 		queue_free()
+
+func _on_player_dead():
+	queue_free()
+	print("enemy killed")
