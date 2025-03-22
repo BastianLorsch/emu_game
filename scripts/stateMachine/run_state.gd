@@ -14,7 +14,10 @@ func handle_input(_delta):
 		player.velocity.x = direction * player.SPEED
 	else:
 		player.change_state("IdleState")
-	
+		
+	if Input.is_action_just_pressed("attack") and !player_weapon.attacking and player_weapon.attack_ready:
+		player_weapon.attacking = true
+		
 	if Input.is_action_just_pressed("jump") and  player.is_on_floor():
 		player.change_state("JumpState")
 	
@@ -24,5 +27,5 @@ func handle_input(_delta):
 	elif Input.is_action_just_pressed("roll") and  player.is_on_floor():
 		player.change_state("RollState")
 		
-	elif Input.is_action_just_pressed("attack") and !player_weapon.attacking and player_weapon.attack_ready:
-		player_weapon.attacking = true
+	
+		

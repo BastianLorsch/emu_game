@@ -80,5 +80,4 @@ func _on_timer_timeout() -> void:
 	regenerating = true
 
 func set_enemy_spawner_position():
-	print("set en spw pos")
 	SignalBus.enemy_spawner_position.emit(enemy_spawner_left.global_position.x, enemy_spawner_right.global_position.x)

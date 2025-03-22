@@ -46,4 +46,3 @@ func _set_health(damage):
 
 func _on_player_dead():
 	queue_free()
-	print("enemy killed")

@@ -50,6 +50,7 @@ polygon = PackedVector2Array(-3.095, -14.47, 4, -14, 11, -12, 15, -7, 18, -1.485
 disabled = true
 
 [node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 0.3
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

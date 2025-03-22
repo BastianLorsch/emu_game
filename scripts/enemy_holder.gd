@@ -6,7 +6,7 @@ var spawn_pos
 func _ready() -> void:
 	SignalBus.enemy_spawner_position.connect(_instance_enemy)
 	spawn_timer.start()
-	_on_timer_timeout()
+	#_on_timer_timeout()
 	
 
 func _instance_enemy(left, right):
@@ -18,7 +18,6 @@ func _instance_enemy(left, right):
 	var scene_enemy = load("res://scenes/enemy.tscn")
 	var instance_enemy = scene_enemy.instantiate()
 	add_child(instance_enemy)
-	print("enemy instanced   ", i)
 	
 func _on_timer_timeout() -> void:
 	SignalBus.get_enemy_spawner_position.emit()
