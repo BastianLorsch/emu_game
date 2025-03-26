@@ -15,4 +15,4 @@ func exit_state():
 
 func handle_input(_delta):
 	pass # no input handling in the base state,
-	# each specific state will implement its own input handling
+	# each specific state has its own input handling
