@@ -2,7 +2,7 @@ extends Node
 
 signal player_damaged(damage) #emit in weapon (enemy)
 signal player_dead() #emit in player
-signal enemy_damaged(damage) #emit in player_weapon
+signal enemy_damaged(damage, body) #emit in player_weapon
 signal start_game() #emit in button (title_screen)
 
 signal enemy_spawner_position(left, right) #emit in player

@@ -153,13 +153,14 @@ offset_bottom = -22.0
 
 [node name="player_weapon" parent="." instance=ExtResource("14_f1ej7")]
 position = Vector2(-2, -11)
+rotation = -1.13446
 collision_layer = 8
 
 [node name="player_heart" type="Marker2D" parent="."]
 position = Vector2(0, -12)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 4.0
 
 [node name="enemy_spawner_left" type="Marker2D" parent="."]
 position = Vector2(-195, -12)

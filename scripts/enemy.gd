@@ -7,14 +7,17 @@ const JUMP_VELOCITY = -400.0
 @onready var healthbar = $Healthbar 
 @onready var player = get_node("../../../Player")
 @onready var spawner = $".."
-var health = 150 : set = _set_health
+var health = 150
 var do_movement = true
+var instance_id
+
 
 func _ready() -> void:
 	position.x = spawner.spawn_pos
 	healthbar.init_health(health)
 	SignalBus.enemy_damaged.connect(_set_health)
 	SignalBus.player_dead.connect(_on_player_dead)
+	instance_id = get_instance_id()
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -24,7 +27,6 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		#velocity.y = JUMP_VELOCITY
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var player_x_pos = player.position.x
@@ -38,11 +40,12 @@ func _physics_process(delta: float) -> void:
 		position.x = move_toward(position.x, player.position.x, delta * SPEED)
 	move_and_slide()
 
-func _set_health(damage):
-	health = min(healthbar.max_value, health - damage)
-	healthbar.health = health
-	if  health <= 0:
-		queue_free()
+func _set_health(damage, body):
+	if body.get_instance_id() == instance_id:
+		health = min(healthbar.max_value, health - damage)
+		healthbar.health = health
+		if  health <= 0:
+			queue_free()
 
 func _on_player_dead():
 	queue_free()

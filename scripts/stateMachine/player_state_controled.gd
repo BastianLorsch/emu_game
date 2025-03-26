@@ -9,10 +9,10 @@ var last_facing_direction = 1
 var health = 100
 var regenerating = false
 var dead = false
+var i = 0		#für i siehe z. 45
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var healthbar = $Healthbar
 @onready var weapon = $player_weapon
-@onready var weapon_sprite = $player_weapon/Sprite2D
 @onready var timer_regeneration = $Timer
 @onready var enemy_spawner_left = $enemy_spawner_left
 @onready var enemy_spawner_right = $enemy_spawner_right
@@ -41,6 +41,10 @@ func _physics_process(delta: float) -> void:
 	# update last facing direction
 	if direction:
 		last_facing_direction = sign(direction)
+	# wird nur ausgeführt, wenn sich last_facing_direction ändert; i diehnt als Zwischenspeicher
+	if !is_same(last_facing_direction, i):
+		i = last_facing_direction
+		player_dir_changed(i)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -81,3 +85,15 @@ func _on_timer_timeout() -> void:
 
 func set_enemy_spawner_position():
 	SignalBus.enemy_spawner_position.emit(enemy_spawner_left.global_position.x, enemy_spawner_right.global_position.x)
+
+func player_dir_changed(player_dir):
+	match player_dir:
+		1.0:
+			weapon.scale = Vector2(1, 1)
+			weapon.position.x = -2
+			weapon.rotation_degrees = -65
+		-1.0:
+			weapon.scale = Vector2(1, -1)
+			weapon.position.x = 0
+			weapon.rotation_degrees = - 115
+			

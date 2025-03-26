@@ -13,7 +13,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if !attacking:
-		look_at(get_global_mouse_position())
 		collision_shape.disabled = true
 		
 	elif attacking and attack_ready:
@@ -26,11 +25,10 @@ func _process(delta: float) -> void:
 		attack_ani.stop()
 		attacking = false
 		
-	print("attacking ", attacking)
-
 func _on_attack_cooldown_timeout() -> void:
 	attack_ready = true
 	# print("attack ready")
 		
 func _on_body_entered(body: Node2D) -> void:
-	SignalBus.enemy_damaged.emit(20)
+	SignalBus.enemy_damaged.emit(20, body)
+	
